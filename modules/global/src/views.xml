@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<views xmlns="http://schemas.haulmont.com/cuba/view.xsd">
+    <view class="com.company.cascadedlookups.entity.City"
+          name="city-browse-view">
+        <property name="name"/>
+        <property name="country"
+                  view="_minimal"/>
+    </view>
+    <view class="com.company.cascadedlookups.entity.Address"
+          name="address-browse-view">
+        <property name="country"
+                  view="_minimal"/>
+        <property name="city"
+                  view="_minimal">
+            <property name="name"/>
+        </property>
+        <property name="addressLine"/>
+    </view>
+</views>

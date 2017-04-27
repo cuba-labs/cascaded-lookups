@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="com.company.cascadedlookups.gui.country.CountryBrowse"
+        focusComponent="countriesTable"
+        lookupComponent="countriesTable"
+        messagesPack="com.company.cascadedlookups.gui.country">
+    <dsContext>
+        <datasource id="countryDs"
+                    class="com.company.cascadedlookups.entity.Country"
+                    view="_local"/>
+        <collectionDatasource id="countriesDs"
+                              class="com.company.cascadedlookups.entity.Country"
+                              view="_local">
+            <query>
+                <![CDATA[select e from demo$Country e]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <layout>
+        <split id="split"
+               height="100%"
+               orientation="horizontal"
+               width="100%">
+            <vbox id="lookupBox"
+                  expand="countriesTable"
+                  height="100%"
+                  margin="false,true,false,false"
+                  spacing="true">
+                <filter id="filter"
+                        applyTo="countriesTable"
+                        datasource="countriesDs">
+                    <properties include=".*"/>
+                </filter>
+                <table id="countriesTable"
+                       width="100%">
+                    <actions>
+                        <action id="create"/>
+                        <action id="edit"/>
+                        <action id="remove"/>
+                    </actions>
+                    <columns>
+                        <column id="name"/>
+                    </columns>
+                    <rows datasource="countriesDs"/>
+                    <rowsCount/>
+                    <buttonsPanel id="buttonsPanel"
+                                  alwaysVisible="true">
+                        <button id="createBtn"
+                                action="countriesTable.create"/>
+                        <button id="editBtn"
+                                action="countriesTable.edit"/>
+                        <button id="removeBtn"
+                                action="countriesTable.remove"/>
+                    </buttonsPanel>
+                </table>
+            </vbox>
+            <vbox id="editBox"
+                  expand="fieldGroupBox"
+                  height="100%"
+                  margin="false,false,false,true"
+                  spacing="true">
+                <vbox id="fieldGroupBox">
+                    <fieldGroup id="fieldGroup"
+                                datasource="countryDs">
+                        <column width="250px">
+                            <field id="name"/>
+                        </column>
+                    </fieldGroup>
+                </vbox>
+                <hbox id="actionsPane"
+                      spacing="true"
+                      visible="false">
+                    <button id="saveBtn"
+                            caption="mainMsg://actions.Ok"
+                            icon="icons/ok.png"
+                            invoke="save"/>
+                    <button id="cancelBtn"
+                            caption="mainMsg://actions.Cancel"
+                            icon="icons/cancel.png"
+                            invoke="cancel"/>
+                </hbox>
+            </vbox>
+        </split>
+    </layout>
+</window>

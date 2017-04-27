@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<screen-config xmlns="http://schemas.haulmont.com/cuba/screens.xsd">
+    <screen id="demo$Country.browse"
+            template="com/company/cascadedlookups/gui/country/country-browse.xml"/>
+    <screen id="demo$City.browse"
+            template="com/company/cascadedlookups/gui/city/city-browse.xml"/>
+    <screen id="demo$Address.browse"
+            template="com/company/cascadedlookups/gui/address/address-browse.xml"/>
+    <screen id="demo$Address.edit"
+            template="com/company/cascadedlookups/gui/address/address-edit.xml"/>
+</screen-config>

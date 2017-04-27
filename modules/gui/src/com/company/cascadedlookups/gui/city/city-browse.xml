@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="com.company.cascadedlookups.gui.city.CityBrowse"
+        focusComponent="citiesTable"
+        lookupComponent="citiesTable"
+        messagesPack="com.company.cascadedlookups.gui.city">
+    <dsContext>
+        <datasource id="cityDs"
+                    class="com.company.cascadedlookups.entity.City"
+                    view="city-browse-view"/>
+        <collectionDatasource id="citiesDs"
+                              class="com.company.cascadedlookups.entity.City"
+                              view="city-browse-view">
+            <query>
+                <![CDATA[select e from demo$City e]]>
+            </query>
+        </collectionDatasource>
+        <collectionDatasource id="countriesDs"
+                              class="com.company.cascadedlookups.entity.Country"
+                              view="_minimal">
+            <query>
+                <![CDATA[select e from demo$Country e]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <layout>
+        <split id="split"
+               height="100%"
+               orientation="horizontal"
+               width="100%">
+            <vbox id="lookupBox"
+                  expand="citiesTable"
+                  height="100%"
+                  margin="false,true,false,false"
+                  spacing="true">
+                <filter id="filter"
+                        applyTo="citiesTable"
+                        datasource="citiesDs">
+                    <properties include=".*"/>
+                </filter>
+                <table id="citiesTable"
+                       width="100%">
+                    <actions>
+                        <action id="create"/>
+                        <action id="edit"/>
+                        <action id="remove"/>
+                    </actions>
+                    <columns>
+                        <column id="name"/>
+                        <column id="country"/>
+                    </columns>
+                    <rows datasource="citiesDs"/>
+                    <rowsCount/>
+                    <buttonsPanel id="buttonsPanel"
+                                  alwaysVisible="true">
+                        <button id="createBtn"
+                                action="citiesTable.create"/>
+                        <button id="editBtn"
+                                action="citiesTable.edit"/>
+                        <button id="removeBtn"
+                                action="citiesTable.remove"/>
+                    </buttonsPanel>
+                </table>
+            </vbox>
+            <vbox id="editBox"
+                  expand="fieldGroupBox"
+                  height="100%"
+                  margin="false,false,false,true"
+                  spacing="true">
+                <vbox id="fieldGroupBox">
+                    <fieldGroup id="fieldGroup"
+                                datasource="cityDs">
+                        <column>
+                            <field id="name"
+                                   width="250px"/>
+                            <field id="country"
+                                   optionsDatasource="countriesDs"/>
+                        </column>
+                    </fieldGroup>
+                </vbox>
+                <hbox id="actionsPane"
+                      spacing="true"
+                      visible="false">
+                    <button id="saveBtn"
+                            caption="mainMsg://actions.Ok"
+                            icon="icons/ok.png"
+                            invoke="save"/>
+                    <button id="cancelBtn"
+                            caption="mainMsg://actions.Cancel"
+                            icon="icons/cancel.png"
+                            invoke="cancel"/>
+                </hbox>
+            </vbox>
+        </split>
+    </layout>
+</window>

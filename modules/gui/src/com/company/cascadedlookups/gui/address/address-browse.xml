@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="com.company.cascadedlookups.gui.address.AddressBrowse"
+        focusComponent="addressesTable"
+        lookupComponent="addressesTable"
+        messagesPack="com.company.cascadedlookups.gui.address">
+    <dsContext>
+        <collectionDatasource id="addressesDs"
+                              class="com.company.cascadedlookups.entity.Address"
+                              view="address-browse-view">
+            <query>
+                <![CDATA[select e from demo$Address e]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <layout expand="addressesTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="addressesTable"
+                datasource="addressesDs">
+            <properties include=".*"/>
+        </filter>
+        <table id="addressesTable"
+               width="100%">
+            <actions>
+                <action id="create"/>
+                <action id="edit"/>
+                <action id="remove"/>
+            </actions>
+            <columns>
+                <column id="country"/>
+                <column id="city"/>
+                <column id="addressLine"/>
+            </columns>
+            <rows datasource="addressesDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn"
+                        action="addressesTable.create"/>
+                <button id="editBtn"
+                        action="addressesTable.edit"/>
+                <button id="removeBtn"
+                        action="addressesTable.remove"/>
+            </buttonsPanel>
+        </table>
+    </layout>
+</window>

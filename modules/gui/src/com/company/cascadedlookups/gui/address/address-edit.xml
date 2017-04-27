@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://editCaption"
+        class="com.company.cascadedlookups.gui.address.AddressEdit"
+        datasource="addressDs" focusComponent="fieldGroup"
+        messagesPack="com.company.cascadedlookups.gui.address">
+    <dsContext>
+        <datasource id="addressDs"
+                    class="com.company.cascadedlookups.entity.Address"
+                    view="address-browse-view"/>
+        <collectionDatasource id="countriesDs"
+                              class="com.company.cascadedlookups.entity.Country"
+                              view="_minimal">
+            <query>
+                <![CDATA[select e from demo$Country e]]>
+            </query>
+        </collectionDatasource>
+        <collectionDatasource id="citiesDs"
+                              class="com.company.cascadedlookups.entity.City"
+                              view="_minimal">
+            <query>
+                <![CDATA[select e from demo$City e
+where e.country.id = :ds$countriesDs]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <layout expand="windowActions" spacing="true">
+        <fieldGroup id="fieldGroup" datasource="addressDs">
+            <column width="250px">
+                <field id="country" optionsDatasource="countriesDs"/>
+                <field id="city" optionsDatasource="citiesDs"/>
+                <field id="addressLine"/>
+            </column>
+        </fieldGroup>
+        <frame id="windowActions" screen="editWindowActions"/>
+    </layout>
+</window>
